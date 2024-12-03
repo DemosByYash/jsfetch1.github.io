@@ -1,0 +1,44 @@
+ <html>
+
+ <head>
+
+ </head>
+ <body>
+     <div class="container">
+        <h2>If you were born as a dog, you would have looked like:</h2>
+        <button style="cursor:pointer" id="check" onclick="seedog()">Check Now !!</button>
+        <br> <br>
+      
+     </div>
+ </body>
+ <script>
+  function seedog(){
+    var button = document.getElementById('check');
+    button.disabled = true; // Disable the button to prevent double-clickin
+
+    if(document.querySelector('.container>img')){
+      var existingImage = document.querySelector('.container>img');
+      existingImage.remove();
+    }
+    var apip = fetch('https://dog.ceo/api/breeds/image/random')
+    apip
+    .then(response => response.json())
+    .then(data => {
+        var dogurl = data.message;
+        var container = document.querySelector('.container');
+        var image = document.createElement('img');
+        image.setAttribute('src', data.message);
+        container.appendChild(image); 
+      })
+    .then(()=>{
+      var button = document.getElementById('check')
+      button.disabled = false;
+    })
+  };
+
+    
+    
+    
+
+ </script>
+ </html>
